@@ -1,0 +1,65 @@
+# ── Core Framework ─────────────────────────────────
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-dotenv==1.0.1
+pydantic==2.10.4
+pydantic-settings==2.7.1
+python-multipart==0.0.20
+
+# ── Async & WebSocket ──────────────────────────────
+websockets==14.1
+httpx==0.28.1
+aiohttp==3.11.11
+aiofiles==24.1.0
+
+# ── Database ───────────────────────────────────────
+sqlalchemy==2.0.36
+asyncpg==0.30.0
+alembic==1.14.1
+psycopg2-binary==2.9.10
+
+# ── Redis ──────────────────────────────────────────
+redis==5.2.1
+aioredis==2.0.1
+
+# ── LLM & AI ──────────────────────────────────────
+openai==1.58.1
+langchain==0.3.14
+langchain-openai==0.3.0
+langchain-community==0.3.14
+
+# ── ML & NLU ──────────────────────────────────────
+torch==2.5.1
+transformers==4.47.1
+scikit-learn==1.6.1
+numpy==2.2.1
+scipy==1.15.0
+
+# ── STT ────────────────────────────────────────────
+deepgram-sdk==3.8.0
+
+# ── TTS ────────────────────────────────────────────
+elevenlabs==1.15.0
+
+# ── Telephony ──────────────────────────────────────
+twilio==9.4.0
+
+# ── PII Redaction ──────────────────────────────────
+presidio-analyzer==2.2.355
+presidio-anonymizer==2.2.355
+
+# ── LiveKit ────────────────────────────────────────
+livekit==0.17.6
+livekit-api==0.7.2
+
+# ── Utilities ──────────────────────────────────────
+celery==5.4.0
+jinja2==3.1.5
+structlog==24.4.0
+tenacity==9.0.0
+
+# ── Testing ────────────────────────────────────────
+pytest==8.3.4
+pytest-asyncio==0.25.0
+pytest-cov==6.0.0
+httpx==0.28.1
