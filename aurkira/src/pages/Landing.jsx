@@ -55,12 +55,12 @@ const features = [
 ]
 
 const problems = [
-  { emoji: '😤', text: 'Press 1, Press 2... customers hate IVR menus' },
-  { emoji: '📞', text: 'High call drop rates (avg 60% abandon IVR calls)' },
-  { emoji: '💸', text: 'Increased operational costs for call centers' },
-  { emoji: '🌍', text: 'No support for regional languages in rural India' },
-  { emoji: '🤖', text: 'Robotic responses that frustrate customers' },
-  { emoji: '📉', text: 'Lost sales from poor customer experience' },
+  { emoji: '1', text: 'Press 1, Press 2... customers hate IVR menus' },
+  { emoji: '2', text: 'High call drop rates (avg 60% abandon IVR calls)' },
+  { emoji: '3', text: 'Increased operational costs for call centers' },
+  { emoji: '4', text: 'No support for regional languages in rural India' },
+  { emoji: '5', text: 'Robotic responses that frustrate customers' },
+  { emoji: '6', text: 'Lost sales from poor customer experience' },
 ]
 
 const integrations = [
