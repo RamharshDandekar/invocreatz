@@ -1,146 +1,113 @@
-"use client";
+import { Link } from 'react-router-dom'
+import { Heart, Instagram, Twitter, Facebook, Youtube, Mail, Phone, MapPin } from 'lucide-react'
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { FaInstagram, FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa'; // React Icons
-
-const Footer = () => {
-    const [email, setEmail] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [subscriptionMessage, setSubscriptionMessage] = useState('');
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setSubscriptionMessage(''); // Clear previous messages
-
-        try {
-            const response = await fetch('/api/subscribe', { // Assumes api/subscribe exists
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                setSubscriptionMessage('Successfully subscribed!');
-            } else {
-                setSubscriptionMessage(`Subscription failed: ${data.error || 'Unknown error'}`);
-            }
-        } catch (error) {
-            console.error('Subscription error:', error);
-            setSubscriptionMessage('Subscription failed: An unexpected error occurred.');
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
+export default function Footer() {
     return (
-        <footer className="bg-purple-100 border-t border-gray-200 py-12">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-                    {/* Logo and Copyright */}
-                    <div className="md:col-span-1">
-                        <Link href="/" className="flex items-center text-lg font-semibold text-gray-800">
-                            <Image
-                                src="/logo.jpeg" // Replace with your logo
-                                alt="AURKIRA"
-                                className="h-8 w-auto mr-2"
-                                width={32}
-                                height={32}
-                            />
-                            AURKIRA
-                        </Link>
-                        <p className="text-gray-500 mt-4 text-sm">© 2024 AURKIRA, Inc. All rights reserved.</p>
-                    </div>
-
-                    {/* Solutions */}
-                    <div>
-                        <h3 className="text-sm font-semibold text-gray-700 mb-3">Solutions</h3>
-                        <ul className="text-sm text-gray-500 space-y-2">
-                            <li><Link href="#">Marketing</Link></li>
-                            <li><Link href="#">Analytics</Link></li>
-                            <li><Link href="#">Automation</Link></li>
-                            <li><Link href="#">Commerce</Link></li>
-                            <li><Link href="#">Insights</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Support */}
-                    <div>
-                        <h3 className="text-sm font-semibold text-gray-700 mb-3">Support</h3>
-                        <ul className="text-sm text-gray-500 space-y-2">
-                            <li><Link href="#">Submit Ticket</Link></li>
-                            <li><Link href="#">Documentation</Link></li>
-                            <li><Link href="#">Guides</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Company */}
-                    <div>
-                        <h3 className="text-sm font-semibold text-gray-700 mb-3">Company</h3>
-                        <ul className="text-sm text-gray-500 space-y-2">
-                            <li><Link href="#">About</Link></li>
-                            <li><Link href="#">Blog</Link></li>
-                            <li><Link href="#">Jobs</Link></li>
-                            <li><Link href="#">Press</Link></li>
-                        </ul>
-                    </div>
-                </div>
-
-                {/* Newsletter Subscription */}
-                <div className="md:flex items-center justify-between border-t border-gray-200 pt-8 pb-4">
-                    <div className="mb-4 md:mb-0">
-                        <h4 className="text-sm font-semibold text-gray-700">Subscribe to our newsletter</h4>
-                        <p className="text-gray-500 text-sm">The latest news, articles, and resources, sent to your inbox weekly.</p>
-                    </div>
-                    <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center">
+        <footer style={{ background: '#1a0a12', color: '#f5d0de', marginTop: 'auto' }}>
+            {/* Newsletter */}
+            <div style={{ background: 'var(--gradient-primary)', padding: '48px 0' }}>
+                <div className="container" style={{ textAlign: 'center' }}>
+                    <h3 style={{ fontFamily: 'Playfair Display, serif', fontSize: 28, color: '#fff', marginBottom: 8 }}>
+                        Stay in the loop
+                    </h3>
+                    <p style={{ color: 'rgba(255,255,255,0.85)', marginBottom: 24, fontSize: 16 }}>
+                        Get the latest trends, exclusive deals, and style tips delivered to your inbox.
+                    </p>
+                    <form style={{ display: 'flex', gap: 12, maxWidth: 440, margin: '0 auto' }} onSubmit={e => e.preventDefault()}>
                         <input
                             type="email"
                             placeholder="Enter your email"
-                            className="w-full md:w-auto rounded-md bg-gray-100 border-gray-300 shadow-sm focus:ring-purple-500 focus:border-purple-500 text-sm px-4 py-2 outline-none"
-                            value={email}
-                            onChange={handleEmailChange}
-                            required
+                            className="input"
+                            style={{ flex: 1, borderColor: 'rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.15)', color: '#fff' }}
                         />
-                        <button
-                            type="submit"
-                            className="bg-purple-500 text-white rounded-md px-5 py-2.5 ml-0 md:ml-3 mt-3 md:mt-0 text-sm font-medium hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
-                            disabled={isSubmitting}
-                        >
-                            {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                        <button className="btn btn-outline" style={{ borderColor: '#fff', color: '#fff', flexShrink: 0 }}>
+                            Subscribe
                         </button>
                     </form>
                 </div>
-                  {subscriptionMessage && (
-                  <p
-                    className={`mt-3 text-sm ${
-                      subscriptionMessage.startsWith('Successfully')
-                        ? 'text-green-500'
-                        : 'text-red-500'
-                    }`}
-                  >
-                    {subscriptionMessage}
-                  </p>
-                )}
+            </div>
 
-                {/* Social Icons */}
-                <div className="flex justify-center md:justify-start mt-8">
-                    <Link href="#" className="text-gray-400 hover:text-gray-500 transition-colors duration-200 mr-4"><FaInstagram className="h-5 w-5" /></Link>
-                    <Link href="#" className="text-gray-400 hover:text-gray-500 transition-colors duration-200 mr-4"><FaTwitter className="h-5 w-5" /></Link>
-                    <Link href="https://github.com/ramharsh-aidev" className="text-gray-400 hover:text-gray-500 transition-colors duration-200 mr-4"><FaGithub className="h-5 w-5" /></Link>
-                    <Link href="https://www.linkedin.com/in/ramharsh-sanjay-dandekar" className="text-gray-400 hover:text-gray-500 transition-colors duration-200"><FaLinkedin className="h-5 w-5" /></Link>
+            {/* Main footer */}
+            <div className="container" style={{ padding: '60px 24px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
+                    {/* Brand */}
+                    <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                            <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--gradient-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, fontWeight: 800, color: '#fff', fontFamily: 'Playfair Display, serif' }}>A</div>
+                            <span style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, color: '#fff', fontWeight: 700 }}>Aurkira</span>
+                        </div>
+                        <p style={{ fontSize: 14, lineHeight: 1.8, color: '#c49aab', maxWidth: 260, marginBottom: 20 }}>
+                            Your destination for premium fashion. Discover curated collections that blend style with sophistication.
+                        </p>
+                        <div style={{ display: 'flex', gap: 12 }}>
+                            {[Instagram, Twitter, Facebook, Youtube].map((Icon, i) => (
+                                <a key={i} href="#" style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(233,30,140,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-primary-light)', transition: 'all var(--transition)', textDecoration: 'none' }}
+                                    onMouseEnter={e => { e.currentTarget.style.background = 'var(--color-primary)'; e.currentTarget.style.color = '#fff' }}
+                                    onMouseLeave={e => { e.currentTarget.style.background = 'rgba(233,30,140,0.15)'; e.currentTarget.style.color = 'var(--color-primary-light)' }}>
+                                    <Icon size={16} />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Shop */}
+                    <div>
+                        <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: 20, fontSize: 14, textTransform: 'uppercase', letterSpacing: 1 }}>Shop</h4>
+                        <ul style={{ listStyle: 'none' }}>
+                            {["Women's Collection", "Men's Collection", "New Arrivals", "Sale", "Trending"].map(l => (
+                                <li key={l} style={{ marginBottom: 10 }}>
+                                    <a href="#" style={{ color: '#c49aab', fontSize: 14, textDecoration: 'none', transition: 'color var(--transition)' }}
+                                        onMouseEnter={e => e.currentTarget.style.color = 'var(--color-primary-light)'}
+                                        onMouseLeave={e => e.currentTarget.style.color = '#c49aab'}>{l}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Help */}
+                    <div>
+                        <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: 20, fontSize: 14, textTransform: 'uppercase', letterSpacing: 1 }}>Help</h4>
+                        <ul style={{ listStyle: 'none' }}>
+                            {['My Account', 'Orders & Returns', 'Shipping Info', 'Size Guide', 'Contact Us'].map(l => (
+                                <li key={l} style={{ marginBottom: 10 }}>
+                                    <a href="#" style={{ color: '#c49aab', fontSize: 14, textDecoration: 'none', transition: 'color var(--transition)' }}
+                                        onMouseEnter={e => e.currentTarget.style.color = 'var(--color-primary-light)'}
+                                        onMouseLeave={e => e.currentTarget.style.color = '#c49aab'}>{l}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Contact */}
+                    <div>
+                        <h4 style={{ color: '#fff', fontWeight: 700, marginBottom: 20, fontSize: 14, textTransform: 'uppercase', letterSpacing: 1 }}>Contact</h4>
+                        <ul style={{ listStyle: 'none' }}>
+                            {[
+                                { Icon: Mail, text: 'hello@aurkira.com' },
+                                { Icon: Phone, text: '+1 (800) 287-4527' },
+                                { Icon: MapPin, text: 'New York, NY 10001' },
+                            ].map(({ Icon, text }) => (
+                                <li key={text} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14, color: '#c49aab', fontSize: 14 }}>
+                                    <Icon size={14} style={{ color: 'var(--color-primary-light)', flexShrink: 0 }} />
+                                    {text}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                {/* Bottom */}
+                <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <p style={{ color: '#9e6a80', fontSize: 13 }}>
+                        © 2025 Aurkira. Made with <Heart size={12} style={{ display: 'inline', color: 'var(--color-primary)', verticalAlign: 'middle' }} /> All rights reserved.
+                    </p>
+                    <div style={{ display: 'flex', gap: 20 }}>
+                        {['Privacy Policy', 'Terms of Service', 'Cookies'].map(l => (
+                            <a key={l} href="#" style={{ color: '#9e6a80', fontSize: 12, textDecoration: 'none' }}>{l}</a>
+                        ))}
+                    </div>
                 </div>
             </div>
         </footer>
-    );
-};
-
-export default Footer;
+    )
+}
