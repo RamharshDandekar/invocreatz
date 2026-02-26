@@ -1,39 +1,27 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
-import CartDrawer from './components/ecommerce/CartDrawer'
-import ChatWidget from './components/chatbot/ChatWidget'
-import Toast from './components/ui/Toast'
-import Home from './pages/Home'
-import Products from './pages/Products'
-import ProductDetail from './pages/ProductDetail'
-import Cart from './pages/Cart'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Favorites from './pages/Favorites'
-import Orders from './pages/Orders'
+import Landing from './pages/Landing'
+import VoiceDemo from './pages/VoiceDemo'
 
 export default function App() {
+  const location = useLocation()
+  const isDemo = location.pathname === '/demo'
+
+  if (isDemo) {
+    return <VoiceDemo />
+  }
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
       <main style={{ flex: 1 }}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop/women" element={<Products gender="women" />} />
-          <Route path="/shop/men" element={<Products gender="men" />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/demo" element={<VoiceDemo />} />
         </Routes>
       </main>
       <Footer />
-      <CartDrawer />
-      <ChatWidget />
-      <Toast />
     </div>
   )
 }
