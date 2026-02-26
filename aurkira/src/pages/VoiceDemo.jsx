@@ -223,7 +223,7 @@ export default function VoiceDemo() {
       // Intelligent fallback – realistic demo responses when API quota is exhausted
       const fallback = getFallbackResponse(text)
       // Add a small delay to simulate API processing
-      await new Promise(r => setTimeout(r, 800 + Math.random() * 1200))
+      await new Promise(r => setTimeout(r, 900 + Math.random() * 1200))
       addBotMessage(fallback)
       if (voiceEnabled) speakText(fallback.replace(/\[.*?\]/g, ''))
     } finally {
