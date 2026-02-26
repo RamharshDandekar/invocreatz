@@ -1,0 +1,44 @@
+# Root .gitignore for monorepo with frontend (aurkira) and backend
+
+# --- Frontend (React - aurkira) ---
+/aurkira/node_modules/
+/aurkira/dist/
+/aurkira/build/
+/aurkira/.env
+/aurkira/.env.local
+/aurkira/.vite
+/aurkira/.parcel-cache
+/aurkira/yarn-error.log
+
+# --- Backend (FastAPI / Python - backend) ---
+/backend/.venv/
+/backend/venv/
+/backend/__pycache__/
+/backend/.pytest_cache/
+/backend/*.pyc
+/backend/*.pyo
+/backend/.env
+/backend/.env.*
+/backend/.mypy_cache/
+/backend/.coverage
+
+# --- General ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+node_modules/
+.env
+.env.local
+dist/
+build/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS / Editor files
+*.swp
+*.swo
+*.bak
