@@ -1,0 +1,98 @@
+version: "3.9"
+
+services:
+  # ── VaakAI API Server ─────────────────────────────
+  vaakai-api:
+    build: .
+    container_name: vaakai-api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    networks:
+      - vaakai-net
+
+  # ── Redis ──────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: vaakai-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - vaakai-net
+
+  # ── PostgreSQL ─────────────────────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: vaakai-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: vaakai
+      POSTGRES_PASSWORD: vaakai_secure_pass
+      POSTGRES_DB: vaakai
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vaakai"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - vaakai-net
+
+  # ── LiveKit Server ────────────────────────────────
+  livekit:
+    image: livekit/livekit-server:latest
+    container_name: vaakai-livekit
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+      - "7882:7882/udp"
+    environment:
+      LIVEKIT_KEYS: "APIxxxxxxxxxxxxx: your_secret"
+    command: --dev
+    restart: unless-stopped
+    networks:
+      - vaakai-net
+
+  # ── Celery Worker (async tasks) ────────────────────
+  celery-worker:
+    build: .
+    container_name: vaakai-celery
+    command: celery -A core.celery_app worker --loglevel=info
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - vaakai-net
+
+volumes:
+  redis-data:
+  postgres-data:
+
+networks:
+  vaakai-net:
+    driver: bridge
